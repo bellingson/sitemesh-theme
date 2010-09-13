@@ -16,7 +16,7 @@
 		<pattern>/home.jsp</pattern>
     </decorator>
 
-    <decorator name="home" page="home_bar.jsp" theme="bar">
+    <decorator name="home" page="home_bar.jsp" appTheme="bar">
 		<pattern>/home.jsp</pattern>
     </decorator>
 

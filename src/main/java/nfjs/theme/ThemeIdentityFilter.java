@@ -37,8 +37,8 @@ public class ThemeIdentityFilter implements Filter {
 
            try {
 
-               Theme theme = ThemeManager.setDomain(domainName);
-               req.setAttribute(THEME_SESSION_ATTRIBUTE,theme);
+               AppTheme appTheme = ThemeManager.setDomain(domainName);
+               req.setAttribute(THEME_SESSION_ATTRIBUTE,appTheme);
 
                String uri = req.getRequestURI();
 

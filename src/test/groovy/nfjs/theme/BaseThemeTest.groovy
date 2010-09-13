@@ -62,8 +62,8 @@ class BaseThemeTest {
              themes << new DefaultTheme(id:1,code:'foo',domainName:'test.foo.com:8080',homeUri:'/index.html',active:true)
              themes << new DefaultTheme(id:2,code:'bar',domainName:'www.test.bar.com:8080',homeUri:'/index.html',active:true)
 
-             Theme theme = themes[0]
-             theme.alternateDomains = [ "www.test.foo.com:8080" ]
+             AppTheme appTheme = themes[0]
+             appTheme.alternateDomains = [ "www.test.foo.com:8080" ]
 
              themeManager.setThemes(themes)
         }

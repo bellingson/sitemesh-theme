@@ -2,8 +2,6 @@ package nfjs.theme
 
 
 import javax.xml.parsers.DocumentBuilderFactory
-import org.codehaus.groovy.tools.xml.DomToGroovy
-
 
 import static org.junit.Assert.*
 import org.junit.Test
@@ -26,7 +24,7 @@ public class ThemeConfigLoaderTest extends BaseThemeTest {
         ThemeConfigLoader tcl = new ThemeConfigLoader(decoratorsFile)
 
         ThemeManager.setThemeId(1)
-        Theme theme = ThemeManager.theme
+        AppTheme theme = ThemeManager.theme
 
         Decorator d = tcl.getDecoratorByName("home")
 

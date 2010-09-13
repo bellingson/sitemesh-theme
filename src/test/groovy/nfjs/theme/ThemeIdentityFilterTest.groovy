@@ -15,7 +15,7 @@ class ThemeIdentityFilterTest extends BaseThemeTest {
 
     @Test void testThemeIdentity() {
 
-        Theme theme = ThemeManager.theme
+        AppTheme theme = ThemeManager.theme
 
         MockHttpServletRequest req = new MockHttpServletRequest()
         MockHttpServletResponse resp = new MockHttpServletResponse()
@@ -39,7 +39,7 @@ class ThemeIdentityFilterTest extends BaseThemeTest {
 
     @Test void testError() {
 
-        Theme theme = ThemeManager.theme
+        AppTheme theme = ThemeManager.theme
 
         MockHttpServletRequest req = new MockHttpServletRequest()
         MockHttpServletResponse resp = new MockHttpServletResponse()
@@ -59,7 +59,7 @@ class ThemeIdentityFilterTest extends BaseThemeTest {
 
     @Test void testHomeUri() {
 
-        Theme theme = ThemeManager.theme
+        AppTheme theme = ThemeManager.theme
 
         MockHttpServletRequest req = new MockHttpServletRequest()
         MockHttpServletResponse resp = new MockHttpServletResponse()

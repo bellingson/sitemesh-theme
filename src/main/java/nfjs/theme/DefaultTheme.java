@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by benellingson@yahoo.com
  * Date: Jan 5, 2010 4:17:22 PM
  */
-public class DefaultTheme implements Theme {
+public class DefaultTheme implements AppTheme {
 
     protected Long id;
     protected String name;

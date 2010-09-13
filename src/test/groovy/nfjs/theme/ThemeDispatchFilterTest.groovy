@@ -8,9 +8,7 @@ import org.junit.Test
 import org.springframework.mock.web.*
 
 import javax.servlet.http.HttpServletResponse
-import javax.servlet.ServletRequest
-import javax.servlet.ServletResponse
-import javax.servlet.ServletException
+
 import javax.servlet.RequestDispatcher
 
 /**
@@ -22,7 +20,7 @@ class ThemeDispatchFilterTest extends BaseThemeTest {
 
     @Test void testSuccess() {
 
-        Theme theme = ThemeManager.theme
+        AppTheme theme = ThemeManager.theme
         
         File homeJsp = new File("${webAppDir}/WEB-INF/theme/${theme.code}/home.jsp" )
 
@@ -57,7 +55,7 @@ class ThemeDispatchFilterTest extends BaseThemeTest {
 
     @Test void test404() {
 
-        Theme theme = ThemeManager.theme
+        AppTheme theme = ThemeManager.theme
 
         MockServletContext msc = new MockServletContext(new File(webAppDir).toURI().toString())
         MockFilterConfig mfc = new MockFilterConfig(msc)

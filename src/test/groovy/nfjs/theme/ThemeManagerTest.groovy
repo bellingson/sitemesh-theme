@@ -14,15 +14,15 @@ class ThemeManagerTest extends BaseThemeTest {
     @Test void testSetDomain() {
 
 
-        Theme theme = ThemeManager.theme
+        AppTheme theme = ThemeManager.theme
 
-        Theme theme2 = ThemeManager.setDomain(theme.domainName)
+        AppTheme theme2 = ThemeManager.setDomain(theme.domainName)
 
         assertTrue theme == theme2
 
         ThemeManager.setThemeId(2)
 
-        Theme theme3 = ThemeManager.setDomain("notreal.com")
+        AppTheme theme3 = ThemeManager.setDomain("notreal.com")
 
         assertTrue theme3 == theme
         
@@ -51,13 +51,13 @@ class ThemeManagerTest extends BaseThemeTest {
 
     @Test void testGetThemeByCode() {
 
-        Theme theme = ThemeManager.theme
+        AppTheme theme = ThemeManager.theme
 
-        Theme theme2 = ThemeManager.getThemeByCode(theme.code)
+        AppTheme theme2 = ThemeManager.getThemeByCode(theme.code)
 
         assertTrue theme == theme2
 
-         Theme theme3 = ThemeManager.getThemeByCode("fake")
+         AppTheme theme3 = ThemeManager.getThemeByCode("fake")
 
         assertTrue theme3 == null
 
@@ -65,11 +65,11 @@ class ThemeManagerTest extends BaseThemeTest {
 
     @Test void testGetThemeById() {
 
-        Theme theme = ThemeManager.theme
+        AppTheme theme = ThemeManager.theme
 
         assertTrue ThemeManager.getThemeById(null) == null 
 
-        Theme theme2 = ThemeManager.getThemeById(theme.id)
+        AppTheme theme2 = ThemeManager.getThemeById(theme.id)
 
         assertTrue theme == theme2
 
@@ -78,7 +78,7 @@ class ThemeManagerTest extends BaseThemeTest {
     @Test void addAlternativeDomains() {
 
 
-          Theme theme = ThemeManager.theme
+          AppTheme theme = ThemeManager.theme
 
           assertTrue theme.alternateDomains.empty == false
 

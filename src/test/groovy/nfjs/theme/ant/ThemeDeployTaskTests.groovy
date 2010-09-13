@@ -35,9 +35,9 @@ public class ThemeDeployTaskTests extends BaseThemeTest {
         assertTrue fooIndex.contains("<title>Foo</title>")
 
         Project p = new Project()
-        p.setProperty("theme.names","foo,bar")
-        p.setProperty("theme.foo.parent","parent")
-        p.setProperty("theme.bar.parent","parent")
+        p.setProperty("appTheme.names","foo,bar")
+        p.setProperty("appTheme.foo.parent","parent")
+        p.setProperty("appTheme.bar.parent","parent")
 
         ThemeDeployTask tdt = new ThemeDeployTask()
         tdt.project = p
@@ -65,7 +65,7 @@ public class ThemeDeployTaskTests extends BaseThemeTest {
         assertTrue new File("${testTargetDir}/scripts").exists()
         assertTrue new File("${testTargetDir}/images").exists()
 
-        // validate filtering @theme.code@
+        // validate filtering @appTheme.code@
 
         String fooPage1 = new File("${testTargetDir}/${testThemeDir}/foo/page1.html").text         
         assertTrue fooPage1.contains("<h1>Page 1 foo</h1>")
@@ -88,9 +88,9 @@ public class ThemeDeployTaskTests extends BaseThemeTest {
         new File(testTargetDir).mkdirs()
 
         Project p = new Project()
-        p.setProperty("theme.names","foo,bar")
-        p.setProperty("theme.foo.parent","parent")
-        p.setProperty("theme.bar.parent","parent")
+        p.setProperty("appTheme.names","foo,bar")
+        p.setProperty("appTheme.foo.parent","parent")
+        p.setProperty("appTheme.bar.parent","parent")
 
         ThemeDeployTask tdt = new ThemeDeployTask()
         tdt.project = p        
@@ -123,8 +123,8 @@ public class ThemeDeployTaskTests extends BaseThemeTest {
         new File(testTargetDir).mkdirs()
 
         Project p = new Project()
-        p.setProperty("theme.foo.parent","parent")
-        p.setProperty("theme.bar.parent","parent")
+        p.setProperty("appTheme.foo.parent","parent")
+        p.setProperty("appTheme.bar.parent","parent")
 
         ThemeDeployTask tdt = new ThemeDeployTask()
         tdt.project = p
@@ -151,8 +151,8 @@ public class ThemeDeployTaskTests extends BaseThemeTest {
             new File(testTargetDir).mkdirs()
 
             Project p = new Project()
-            p.setProperty("theme.foo.parent","parent")
-            p.setProperty("theme.bar.parent","parent")
+            p.setProperty("appTheme.foo.parent","parent")
+            p.setProperty("appTheme.bar.parent","parent")
 
             ThemeDeployTask tdt = new ThemeDeployTask()
             tdt.project = p
@@ -188,7 +188,7 @@ public class ThemeDeployTaskTests extends BaseThemeTest {
             assertTrue f.text.contains('overwrite this')
 
             Project p = new Project()
-            p.setProperty("theme.foo.parent","parent")
+            p.setProperty("appTheme.foo.parent","parent")
 
             ThemeDeployTask tdt = new ThemeDeployTask()
             tdt.project = p
@@ -231,7 +231,7 @@ public class ThemeDeployTaskTests extends BaseThemeTest {
 
             assertTrue f.exists()
 
-            // apply filter to: <h1>Hello : @theme.code@</h1>
+            // apply filter to: <h1>Hello : @appTheme.code@</h1>
             assertTrue f.text.contains("<h1>Hello : baz</h1>")
 
             // don't filter image files

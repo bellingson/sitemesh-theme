@@ -11,7 +11,7 @@ import java.util.Map;
 
 
 
-public interface Theme  {
+public interface AppTheme {
 
     public Long getId();
 

@@ -13,10 +13,10 @@
 
 <target name="test" >
 
-    <theme-deploy sourcePath="${theme.src.web}"
-                  themePath="${theme.src.themes}"
-                  targetPath="${theme.build.web.dir}"
-                  filterIncludes="${theme.src.filterIncludes}"
+    <theme-deploy sourcePath="${appTheme.src.web}"
+                  themePath="${appTheme.src.themes}"
+                  targetPath="${appTheme.build.web.dir}"
+                  filterIncludes="${appTheme.src.filterIncludes}"
                   >
     </theme-deploy>
 
@@ -25,9 +25,9 @@
 
 <target name="clean">
 
-    <echo message="DELETE: ${theme.build.web.dir}"/>
+    <echo message="DELETE: ${appTheme.build.web.dir}"/>
 
-    <delete dir="${theme.build.web.dir}" quiet="true"/>
+    <delete dir="${appTheme.build.web.dir}" quiet="true"/>
 
 
 </target>

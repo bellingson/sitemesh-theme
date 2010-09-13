@@ -12,10 +12,8 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.io.File;
-import java.io.IOException;
 
 import org.w3c.dom.*;
-import org.xml.sax.SAXException;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.Log;
 
@@ -60,7 +58,7 @@ public class ThemeConfigLoader {
     /** Retrieve Decorator based on name specified in configuration file. */
     public Decorator getDecoratorByName(String name) throws ServletException {
         refresh();
-        Theme theme = ThemeManager.getTheme();
+        AppTheme theme = ThemeManager.getTheme();
         int mapOrdinal =  (int) (theme.getId() - 1);
 
         return (Decorator) ((Map)decorators[mapOrdinal]).get(name);
@@ -70,7 +68,7 @@ public class ThemeConfigLoader {
     public String getMappedName(String path) throws ServletException {
         refresh();
 
-        Theme theme = ThemeManager.getTheme();
+        AppTheme theme = ThemeManager.getTheme();
         int mapOrdinal =  (int) (theme.getId() - 1);
 
         return pathMapper[mapOrdinal].get(path);
@@ -156,9 +154,9 @@ public class ThemeConfigLoader {
     public void initializeMaps() {
 
         // Clear previous config
-        List<Theme> themes = ThemeManager.getThemes();
+        List<AppTheme> themes = ThemeManager.getThemes();
 
-        Theme lastTheme = (Theme) themes.get(themes.size() - 1);
+        AppTheme lastTheme = (AppTheme) themes.get(themes.size() - 1);
         Integer mapSize = lastTheme.getId().intValue();
 
         decorators = new HashMap[mapSize];
@@ -190,19 +188,19 @@ public class ThemeConfigLoader {
     public void createThemedDecorator(Element decoratorElement, String page, String uriPath) {
 
         // customize for the selected theme
-        String code = getAttribute(decoratorElement,"theme");
+        String code = getAttribute(decoratorElement,"appTheme");
 
         if(code == null) {          // apply to all themes
 
-            List<Theme> themes = ThemeManager.getThemes();
-            for(Theme theme: themes) {
-               createDecorator(decoratorElement, theme,page,uriPath,false);
+            List<AppTheme> themes = ThemeManager.getThemes();
+            for(AppTheme appTheme: themes) {
+               createDecorator(decoratorElement, appTheme,page,uriPath,false);
             }
 
         } else {   // apply to a single web app
 
-            Theme theme = ThemeManager.getThemeByCode(code);
-            createDecorator(decoratorElement, theme,page,uriPath,true);
+            AppTheme appTheme = ThemeManager.getThemeByCode(code);
+            createDecorator(decoratorElement, appTheme,page,uriPath,true);
         }
 
 
@@ -233,9 +231,9 @@ public class ThemeConfigLoader {
 
 
 
-    private void createDecorator(Element decoratorElement, Theme theme, String page, String uriPath, boolean overRide ) {
+    private void createDecorator(Element decoratorElement, AppTheme appTheme, String page, String uriPath, boolean overRide ) {
 
-        int mapOrdinal = (int) (theme.getId() - 1);
+        int mapOrdinal = (int) (appTheme.getId() - 1);
         Map themeDecorators = decorators[mapOrdinal];
 
         String name = getAttribute(decoratorElement, "name");
@@ -246,7 +244,7 @@ public class ThemeConfigLoader {
         String role = getAttribute(decoratorElement, "role");
         Map params = parseParams(decoratorElement);
 
-        ThemeDecorator td = new ThemeDecorator(theme,name, page, uriPath, role, params);
+        ThemeDecorator td = new ThemeDecorator(appTheme,name, page, uriPath, role, params);
 
         themeDecorators.put(td.getName(),td);
 

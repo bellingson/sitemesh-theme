@@ -14,7 +14,7 @@ import java.util.*;
  */
 public class ThemeManager {
 
-    private static List<Theme> themes;
+    private static List<AppTheme> themes;
 
     private static Map domainThemeMap;
     private static Map themeMap;
@@ -22,53 +22,53 @@ public class ThemeManager {
     private static ThreadLocal themeHolder = new ThreadLocal();
 
 
-    public static Theme setDomain(String domainName) {
+    public static AppTheme setDomain(String domainName) {
 
-        Theme theme = (Theme) domainThemeMap.get(domainName);
+        AppTheme appTheme = (AppTheme) domainThemeMap.get(domainName);
 
-        if(theme == null) {
+        if(appTheme == null) {
             LogFactory.getLog(ThemeManager.class).warn("Unrecognized domain: " + domainName);
-            theme = (Theme) themes.get(0);
+            appTheme = (AppTheme) themes.get(0);
         }
 
-        themeHolder.set(theme);
+        themeHolder.set(appTheme);
 
-        return theme;
+        return appTheme;
     }
 
-    public static Theme setThemeId(Long themeId) {
+    public static AppTheme setThemeId(Long themeId) {
 
         if(themeId == null) return null;
 
-        Theme theme = (Theme) themeMap.get(themeId.toString());
-        if(theme == null) throw new IllegalStateException("Missing app for id: " + themeId);
-        themeHolder.set(theme);
+        AppTheme appTheme = (AppTheme) themeMap.get(themeId.toString());
+        if(appTheme == null) throw new IllegalStateException("Missing app for id: " + themeId);
+        themeHolder.set(appTheme);
 
-        return theme;
+        return appTheme;
     }
 
 
-    public static Theme getTheme() {
-        Theme theme = (Theme) themeHolder.get();
-        if(theme == null) {
+    public static AppTheme getTheme() {
+        AppTheme appTheme = (AppTheme) themeHolder.get();
+        if(appTheme == null) {
             LogFactory.getLog(ThemeManager.class).error("ERROR: theme not set",new Exception("Theme not Set"));
             throw new IllegalStateException("Theme has not been set");
         }
-        return theme;
+        return appTheme;
     }
 
-    public static Theme getThemeByCode(String code) {
+    public static AppTheme getThemeByCode(String code) {
 
-        for(Theme theme : themes) {
-            if(theme.getCode().equals(code)) { return theme; }
+        for(AppTheme appTheme : themes) {
+            if(appTheme.getCode().equals(code)) { return appTheme; }
         }
         return null;
 
     }
 
-    public static Theme getThemeById(Long id) {
+    public static AppTheme getThemeById(Long id) {
         if(id == null) return null;
-        return (Theme) themeMap.get(id.toString());
+        return (AppTheme) themeMap.get(id.toString());
     }
 
 
@@ -82,7 +82,7 @@ public class ThemeManager {
         init(themes);
     }
 
-    public static List<Theme> getThemes() {
+    public static List<AppTheme> getThemes() {
         return ThemeManager.themes;
     }
 
@@ -91,12 +91,12 @@ public class ThemeManager {
     }
 
 
-    private void init(List<Theme> themes) {
+    private void init(List<AppTheme> themes) {
 
         themeMap = new FastHashMap();
         domainThemeMap = new FastHashMap();
 
-        for(Theme theme : themes) {
+        for(AppTheme theme : themes) {
 
             addAlternativeDomains(theme);
 
@@ -113,7 +113,7 @@ public class ThemeManager {
     }
 
 
-    public void addAlternativeDomains(Theme theme) {
+    public void addAlternativeDomains(AppTheme theme) {
 
         List alternateDomains = theme.getAlternateDomains();
 
@@ -132,12 +132,12 @@ public class ThemeManager {
 
     }
 
-    public static String delimitAbreviations(Collection<Theme> themes) {
+    public static String delimitAbreviations(Collection<AppTheme> themes) {
 
         StringBuffer s = new StringBuffer();
         Iterator i = themes.iterator();
         while(i.hasNext()) {
-            Theme theme = (Theme) i.next();
+            AppTheme theme = (AppTheme) i.next();
             s.append(theme.getCode());
             if(i.hasNext())
                 s.append(",");

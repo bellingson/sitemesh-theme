@@ -39,9 +39,9 @@ public class ThemeDeployTask extends org.apache.tools.ant.Task {
 
         for(String theme : themes) {
 
-             filterSet.addFilter("theme.code",theme);
+             filterSet.addFilter("appTheme.code",theme);
 
-             String parent = p.getProperty("theme." + theme + ".parent");
+             String parent = p.getProperty("appTheme." + theme + ".parent");
              deployTheme(theme,parent);
         }
 
@@ -59,7 +59,7 @@ public class ThemeDeployTask extends org.apache.tools.ant.Task {
         if(devApp != null)
             themeNames = devApp;
         else if(themeNames == null)
-            themeNames = p.getProperty("theme.names");
+            themeNames = p.getProperty("appTheme.names");
 
     }
 
