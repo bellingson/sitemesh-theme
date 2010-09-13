@@ -1,5 +1,7 @@
 
-def cobSerFile="${project.buildDir}/build/cobertura.ser"
+// add -Pversion=xxx to command line to add version
+
+def cobSerFile="${project.buildDir}/cobertura.ser"
 def srcOriginal="${sourceSets.main.classesDir}"
 def srcCopy="${srcOriginal}-copy"
 

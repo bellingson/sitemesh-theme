@@ -1,0 +1,35 @@
+
+sitemesh-theme
+------------------------------------------------------
+
+This project extends sitemesh (http://www.opensymphony.com/sitemesh/) 
+in order to enable the creation of website themes or private labels.
+
+This package allows you to host multiple distinctively designed domains 
+using a single web application.  
+
+For certain use cases this enables: 
+1) reusing front-end code and resources (HTML, CSS, images, etc)
+2) speed deployment
+3) scale (run multiple websites in one JVM without the overhead of multiple webapps)
+
+Usage
+-----------------------------------------------------
+TODO
+
+This project was initially created for the No Fluff Just Stuff
+Symposium series: nofluffjuststuff.com and has been used to
+host many sites based on the common NFJS code base.
+
+These sites include:
+
+http://www.nofluffjuststuff.com/
+http://uberconf.com/
+http://www.springone2gx.com/
+http://www.therichwebexperience.com/
+http://www.nfjsone.com/
+http://www.jsfsummit.com/
+
+
+
+
