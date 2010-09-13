@@ -3,14 +3,14 @@ sitemesh-theme
 ------------------------------------------------------
 
 This project extends sitemesh (http://www.opensymphony.com/sitemesh/) 
-in order to enable the creation of website themes or private labels.
+to enable code reuse via website themes... aka "private labels".
 
-This package allows you to host multiple distinctively designed domains 
-using a single web application.  
+It allows you to host multiple domains with distinct designs
+from a single web application.
 
-For certain use cases this enables: 
+This enables:
 1) reusing front-end code and resources (HTML, CSS, images, etc)
-2) speed deployment
+2) reduced deployment time
 3) scale (run multiple websites in one JVM without the overhead of multiple webapps)
 
 Usage

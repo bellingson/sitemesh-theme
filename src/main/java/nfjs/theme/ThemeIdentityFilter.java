@@ -1,5 +1,8 @@
 package nfjs.theme;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +22,11 @@ import java.io.IOException;
  */
 public class ThemeIdentityFilter implements Filter {
 
+    private final static String THEME_SESSION_ATTRIBUTE = "appTheme";
+
     private final static String [] HOME_URI = { "/","/index.jsp","/index.html" };
+    
+    protected final Log log = LogFactory.getLog(ThemeIdentityFilter.class);
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain fc) throws IOException, ServletException {
 
@@ -31,7 +38,7 @@ public class ThemeIdentityFilter implements Filter {
            try {
 
                Theme theme = ThemeManager.setDomain(domainName);
-               req.setAttribute("theme",theme);
+               req.setAttribute(THEME_SESSION_ATTRIBUTE,theme);
 
                String uri = req.getRequestURI();
 
@@ -42,6 +49,9 @@ public class ThemeIdentityFilter implements Filter {
                }
 
                fc.doFilter(request,response);
+
+           } catch(Throwable t) {
+               log.error("ERROR",t);
 
            } finally {
                ThemeManager.clear();

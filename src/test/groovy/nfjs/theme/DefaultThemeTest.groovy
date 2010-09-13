@@ -12,8 +12,6 @@ class DefaultThemeTest {
 
     @Test void testTheme() {
 
-        println 'test theme'
-
          DefaultTheme theme = new DefaultTheme(id:1,name:'test',domainName:'localhost:8080',active:true)
          theme.properties = ['foo':'bar']
 

@@ -23,7 +23,7 @@ class ThemeIdentityFilterTest extends BaseThemeTest {
 
         req.addHeader("host",theme.domainName)
 
-        assertTrue req.getAttribute("theme") == null
+        assertTrue req.getAttribute("appTheme") == null
 
         ThemeIdentityFilter tif = new ThemeIdentityFilter()
 
@@ -31,7 +31,7 @@ class ThemeIdentityFilterTest extends BaseThemeTest {
 
         tif.doFilter(req,resp,fc)
 
-        assertTrue req.getAttribute("theme") == theme
+        assertTrue req.getAttribute("appTheme") == theme
 
         tif.destroy()
 
@@ -48,7 +48,7 @@ class ThemeIdentityFilterTest extends BaseThemeTest {
 
         req.addHeader("host",theme.domainName)
 
-        assertTrue req.getAttribute("theme") == null
+        assertTrue req.getAttribute("appTheme") == null
 
         ThemeIdentityFilter tif = new ThemeIdentityFilter()
         tif.doFilter(req,resp,fc)
@@ -70,7 +70,7 @@ class ThemeIdentityFilterTest extends BaseThemeTest {
 
         req.requestURI = '/'
 
-        assertTrue req.getAttribute("theme") == null
+        assertTrue req.getAttribute("appTheme") == null
 
         ThemeIdentityFilter tif = new ThemeIdentityFilter()
         tif.doFilter(req,resp,fc)
