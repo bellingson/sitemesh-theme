@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+
+     <display-name>Sitemesh Theme</display-name>
+    <description>Sitemesh Theme Test App</description>
+
+    <filter>
+        <filter-name>themeIdentityFilter</filter-name>
+        <filter-class>nfjs.theme.ThemeIdentityFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>themeDispatchFilter</filter-name>
+        <filter-class>nfjs.theme.ThemeDispatchFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>themeIdentityFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>themeDispatchFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
+</web-app>    

@@ -1,0 +1,36 @@
+
+<project name="sitemesh-theme" default="test" basedir="../../..">
+
+<property file="src/main/ant/build.properties"/>    
+
+<path id="project.classpath">
+        <fileset dir="target/classes" includes="**/*.jar,**/*.class"/>
+        <pathelement path="${java.class.path}"/>
+        <pathelement path="target/classes/production/Main"/>
+</path>
+
+<taskdef name="theme-deploy"  classname="nfjs.theme.ant.ThemeDeployTask" classpathref="project.classpath" />
+
+<target name="test" >
+
+    <theme-deploy sourcePath="${theme.src.web}"
+                  themePath="${theme.src.themes}"
+                  targetPath="${theme.build.web.dir}"
+                  filterIncludes="${theme.src.filterIncludes}"
+                  >
+    </theme-deploy>
+
+
+</target>
+
+<target name="clean">
+
+    <echo message="DELETE: ${theme.build.web.dir}"/>
+
+    <delete dir="${theme.build.web.dir}" quiet="true"/>
+
+
+</target>
+
+
+</project>

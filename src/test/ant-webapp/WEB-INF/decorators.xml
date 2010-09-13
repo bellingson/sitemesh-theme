@@ -1,0 +1,28 @@
+ <!--
+<decorators defaultdir="/decorators">
+-->    
+
+<decorators>
+
+    <excludes>
+        <pattern>/script/*</pattern>
+        <pattern>/styles/*</pattern>
+        <pattern>/*.jpg</pattern>
+    </excludes>
+
+    <!--// public views -->
+
+    <decorator name="home" page="home.jsp">
+		<pattern>/home.jsp</pattern>
+    </decorator>
+
+    <decorator name="home" page="home_bar.jsp" theme="bar">
+		<pattern>/home.jsp</pattern>
+    </decorator>
+
+    <decorator-mapping decorator="none">
+		<pattern>/styles/*</pattern>
+		<pattern>/components/*</pattern>
+    </decorator-mapping>
+
+</decorators>
