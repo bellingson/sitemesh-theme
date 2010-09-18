@@ -57,6 +57,28 @@ class ThemeIdentityFilterTest extends BaseThemeTest {
 
     }
 
+    @Test void testCatchError() {
+
+        AppTheme theme = ThemeManager.theme
+
+        MockHttpServletRequest req = new MockHttpServletRequest()
+        MockHttpServletResponse resp = new MockHttpServletResponse()
+
+        ThemeMockFilterChain fc = new ThemeMockFilterChain(new Exception("test exception"))
+
+        req.addHeader("host",theme.domainName)
+
+        assertTrue req.getAttribute("appTheme") == null
+
+        ThemeIdentityFilter tif = new ThemeIdentityFilter()
+        tif.doFilter(req,resp,fc)
+
+        assertTrue fc.called == false
+
+    }
+
+
+
     @Test void testHomeUri() {
 
         AppTheme theme = ThemeManager.theme

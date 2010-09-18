@@ -1,0 +1,21 @@
+<!--
+<decorators defaultdir="/decorators">
+-->
+
+<decorators>
+
+    <excludes>
+        <pattern>/image/*</pattern>
+        <pattern>/script/*</pattern>
+        <pattern>/style/*</pattern>
+    </excludes>
+
+    <!--// public views -->
+
+    <decorator name="main" page="main.jsp">
+		<pattern>/*</pattern>
+    </decorator>
+
+
+
+</decorators>

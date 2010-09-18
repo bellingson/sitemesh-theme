@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+
+    <display-name>Sample App</display-name>
+    <description>Sample App</description>
+
+<!--
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/classes/applicationContext.xml
+        </param-value>
+    </context-param>
+-->
+
+
+    <filter>
+        <filter-name>themeIdentityFilter</filter-name>
+        <filter-class>nfjs.theme.ThemeIdentityFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>sitemesh</filter-name>
+        <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>themeDispatchFilter</filter-name>
+        <filter-class>nfjs.theme.ThemeDispatchFilter</filter-class>
+    </filter>
+
+
+    <!-- STRUTS and SITE MESH FILTERS -->
+
+<!--
+    <filter>
+        <filter-name>struts-prepare</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter</filter-class>
+    </filter>
+
+
+    <filter>
+        <filter-name>struts-execute</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter</filter-class>
+    </filter>
+   -->
+
+
+
+
+<!-- FILTER MAPPINGS -->
+
+
+
+    <filter-mapping>
+        <filter-name>themeIdentityFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--
+
+    <filter-mapping>
+        <filter-name>struts-prepare</filter-name>
+        <url-pattern>/m/*</url-pattern>
+    </filter-mapping>
+    -->
+
+    <filter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--
+    <filter-mapping>
+        <filter-name>struts-execute</filter-name>
+        <url-pattern>/m/*</url-pattern>
+    </filter-mapping>
+
+       -->
+
+    <filter-mapping>
+        <filter-name>themeDispatchFilter</filter-name>
+        <url-pattern>/img/*</url-pattern>
+        <url-pattern>/styles/*</url-pattern>
+    </filter-mapping>
+
+
+
+    <!-- Listeners -->
+
+    <listener>
+        <listener-class>sample.SimpleAppThemeListener</listener-class>
+    </listener>
+
+    <!--
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    -->
+
+    <!-- Servlet
+
+    <servlet>
+       <servlet-name>paypalServlet</servlet-name>
+       <servlet-class>nfjs.servlet.PaypalServlet</servlet-class>
+   </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>nfjsPdfServlet</servlet-name>
+        <url-pattern>/servlet/pdf/*</url-pattern>
+    </servlet-mapping>
+
+    -->
+
+
+</web-app>
+

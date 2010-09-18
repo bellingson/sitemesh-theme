@@ -13,6 +13,25 @@ This enables:
 2) reduced deployment time
 3) scale (run multiple websites in one JVM without the overhead of multiple webapps)
 
+Building
+-----------------------------------------------------
+sitemesh-theme uses a Gradle build:  http://www.gradle.org/
+
+Once Gradle is Installed use the command:
+
+gradle build
+
+
+The sitemesh-theme.jar will be in the build/lib directory
+
+Dependencies
+-----------------------------------------------------
+sitemesh-2.4.2
+commons-collections-3.2
+commons-logging-1.1
+
+
+
 Usage
 -----------------------------------------------------
 TODO
