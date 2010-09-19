@@ -11,6 +11,7 @@ import com.opensymphony.module.sitemesh.Decorator
 import javax.xml.parsers.ParserConfigurationException
 import javax.servlet.ServletException
 import org.w3c.dom.Element
+import com.opensymphony.module.sitemesh.mapper.PathMapper
 
 /**
  * User: ben
@@ -177,7 +178,7 @@ public class ThemeConfigLoaderTest extends BaseThemeTest {
                                         <param-value>bar</param-value>
                                     </init-param>
                                 </decorator>
-                                <decorator name="home" page="home_bar.jsp" theme="bar">
+                                <decorator name="home" page="home_bar.jsp" appTheme="bar">
                                     <pattern>/home.jsp</pattern>
                                 </decorator>
                               </decorators>"""
@@ -214,7 +215,7 @@ public class ThemeConfigLoaderTest extends BaseThemeTest {
 
     }
 
-        @Test void testGetContainedText() {
+    @Test void testGetContainedText() {
 
         String docString = "<document><foo>bar</foo></document>"
 
@@ -227,6 +228,51 @@ public class ThemeConfigLoaderTest extends BaseThemeTest {
         assertTrue tcl.getContainedText(e,'foo') == 'bar'
         assertTrue tcl.getContainedText(e,'bar') == null
         assertTrue tcl.getContainedText(null,'foo') == null
+
+    }
+
+    @Test void testPopulatePathMapper() {
+
+
+        String docString = """<decorators defaultdir='/decorators'>
+                                <decorator name="home" page="home.jsp">
+                                    <pattern>/home.jsp</pattern>
+                                    <pattern></pattern>
+                                </decorator>
+                                <decorator name="home" page="home_bar.jsp" appTheme="bar">
+                                    <pattern>/home.jsp</pattern>
+                                </decorator>
+                              </decorators>"""
+
+        def doc = stringToXmlDocument(docString)
+
+        ThemeConfigLoader tcl = new ThemeConfigLoader()
+
+        Element e = doc.documentElement
+        Element decorator = e.getElementsByTagName('decorator').item(0)
+        String name = tcl.getAttribute(decorator,'name')
+        def patterns = decorator.getElementsByTagName('pattern')
+
+        PathMapper pm = new PathMapper()
+
+        tcl.populatePathMapper(pm,patterns,null,name)
+
+        String key = pm.get('/home.jsp')
+
+        assertTrue key == 'home'
+
+        // test with role
+
+        pm = new PathMapper()
+
+        tcl.populatePathMapper(pm,patterns,'user',name)
+
+        key = pm.get('/home.jsp')
+
+        assertTrue key == 'homeuser'
+
+
+
 
     }
 

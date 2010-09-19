@@ -94,6 +94,9 @@ public class ThemeDecoratorMapper extends AbstractDecoratorMapper {
         if (result == null ||
                 (result.getRole() != null && !request.isUserInRole(result.getRole()))) {
             // if the result is null or the user is not in the role
+
+            log.warn("REQ: " + request + " SU: " + super.getClass() + " NAME: " + name );
+
             return super.getNamedDecorator(request, name);
         }
         else {

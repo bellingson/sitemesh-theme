@@ -29,13 +29,14 @@ public class ThemeDispatchFilter implements Filter {
 
         try {
 
-            String requestURI = req.getRequestURI();
-            String targetUri = ThemeManager.resolveResource(requestURI);
+            String resourcePath = parseResourcePath(req);
+
+            String targetUri = ThemeManager.resolveResource(resourcePath);
 
              // if resource does not exist return 404
             if(doesResourceExist(targetUri) == false) {
                 log.warn("RESOURCE: " + targetUri + " DOES NOT EXIST \n REFERER: " + req.getHeader("Referer") + "\nUser-Agent: " + req.getHeader("User-Agent"));
-                 resp.sendError(HttpServletResponse.SC_NOT_FOUND,"Could not find: " + requestURI);
+                 resp.sendError(HttpServletResponse.SC_NOT_FOUND,"Could not find: " + resourcePath);
                  return;
             }
 
@@ -46,6 +47,19 @@ public class ThemeDispatchFilter implements Filter {
             handleError(t,req,resp);
         }
     }
+
+    public String parseResourcePath(HttpServletRequest req) {
+
+        String context = req.getContextPath();
+        String uri = req.getRequestURI();
+
+        if(context == null || context.trim().equals("")) {
+            return uri;
+        }
+
+        return uri.substring(context.length());
+    }
+
 
     public void handleError(Throwable e, HttpServletRequest req, HttpServletResponse resp) throws IOException {
 

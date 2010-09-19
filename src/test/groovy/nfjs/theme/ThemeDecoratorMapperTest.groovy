@@ -197,16 +197,22 @@ public class ThemeDecoratorMapperTest extends BaseThemeTest {
            
        }
 
-/*
-       @Test(expected=ServletException) void testGetNamedDecoratorError() {
+
+       @Test void testGetNamedDecoratorServletException() {
 
            MockHttpServletRequest req  = new MockHttpServletRequest()
 
+           Decorator decorator = decoratorMapper.getNamedDecorator(req,"home")
 
            ThemeDecoratorMapper tdm = new ThemeDecoratorMapper()
+           tdm.parent = new ConfigDecoratorMapper() {
+              public Decorator getNamedDecorator(HttpServletRequest request, String name) {
+                   return decorator
+              }
+          }
+
            tdm.configLoader = new ThemeConfigLoader() {
                  public Decorator getDecoratorByName(String name) {
-                     log.error("GDN: " + name)
                     throw new ServletException("test exception")
                  }
            }
@@ -214,7 +220,7 @@ public class ThemeDecoratorMapperTest extends BaseThemeTest {
            tdm.getNamedDecorator(req,"foo")
 
        }
-*/       
+
 
     
        @Test(expected=InstantiationException) void testInitError() {

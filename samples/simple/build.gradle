@@ -24,6 +24,8 @@ dependencies {
     runtime group: 'opensymphony', name: 'sitemesh', version: '2.4.2'
     runtime group: 'commons-collections', name: 'commons-collections', version: '3.2'
     runtime group: 'commons-logging', name: 'commons-logging-api', version: '1.1'
+    runtime group: 'jstl', name: 'jstl', version: '1.1.2'
+    runtime group: 'taglibs', name: 'standard', version: '1.1.2'
 
     compile group: 'org.apache.tomcat', name: 'servlet-api', version: '6.0.20'
 

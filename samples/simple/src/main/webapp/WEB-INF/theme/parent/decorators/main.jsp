@@ -1,10 +1,5 @@
 
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
-<%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page" %>
-<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
-
-
+<%@ include file="/components/taglibs.jsp" %>
 
 <!doctype html>
 <html>

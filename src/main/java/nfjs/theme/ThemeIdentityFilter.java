@@ -24,7 +24,7 @@ public class ThemeIdentityFilter implements Filter {
 
     private final static String THEME_SESSION_ATTRIBUTE = "appTheme";
 
-    private final static String [] HOME_URI = { "/","/index.jsp","/index.html" };
+    private final static String [] HOME_URI = { "/" };
     
     protected final Log log = LogFactory.getLog(ThemeIdentityFilter.class);
 
@@ -43,8 +43,9 @@ public class ThemeIdentityFilter implements Filter {
                String uri = req.getRequestURI();
 
                // if uri matches home pattern continue in filter chain
-               if(isHomeUri(uri)) {
-                   resp.sendRedirect(ThemeManager.getTheme().getHomeUri());
+               if(isHomeURI(req,uri)) {
+                   String redirectUri = formatHomeURI(req,appTheme);
+                   resp.sendRedirect(redirectUri);
                    return;
                }
 
@@ -58,10 +59,29 @@ public class ThemeIdentityFilter implements Filter {
            }
        }
 
-        public Boolean isHomeUri(String uri) {
+        public String formatHomeURI(HttpServletRequest req, AppTheme theme) {
+
+            String context = req.getContextPath();
+            if(context == null || context.trim().equals("")) {
+                return theme.getHomeUri();
+            }
+
+            return context + theme.getHomeUri();
+
+        }
+
+
+        public Boolean isHomeURI(HttpServletRequest req, String uri) {
+
+            String context = req.getContextPath();
+            if(context != null && context.trim().equals(""))
+                context = null;
 
             for(String huri : HOME_URI) {  // if uri = '/'
-                if(uri.equals(huri)) {
+
+                String contextHome = context == null ? huri : context + huri;
+                
+                if(uri.equals(contextHome)) {
                     return true;
                 }
             }

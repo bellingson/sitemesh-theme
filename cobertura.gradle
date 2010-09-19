@@ -1,9 +1,10 @@
 
 // add -Pversion=xxx to command line to add version
 
-def cobSerFile="${project.buildDir}/cobertura.ser"
-def srcOriginal="${sourceSets.main.classesDir}"
-def srcCopy="${srcOriginal}-copy"
+def cobSerFile = "${project.buildDir}/cobertura.ser"
+def srcOriginal = "${sourceSets.main.classesDir}"
+def srcCopy = "${srcOriginal}-copy"
+def reportDir = "${project.buildDirName}/reports/coverage"
 
 dependencies {
      compile group: 'net.sourceforge.cobertura', name: 'cobertura', version: '1.9.3'
@@ -47,7 +48,7 @@ test.doLast {
                      tofile: srcOriginal)
         }
         // create cobertura reports
-        ant.'cobertura-report'(destdir:"${project.buildDirName}/cobertura-report",
+        ant.'cobertura-report'(destdir:reportDir,
              format:'html', srcdir:"src/main/java", datafile:cobSerFile)
     }
 }

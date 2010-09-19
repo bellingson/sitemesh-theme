@@ -77,6 +77,10 @@ class BaseThemeTest {
          "build/webapp"
     }
 
+    String getWebAppDirURI() {
+        new File(webAppDir).toURI().toString()
+    }
+
     File getConfigFile() {
 
         //String configFileName = getClass().getResource("sitemesh.xml").file

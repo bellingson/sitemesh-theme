@@ -84,8 +84,7 @@
 
     <filter-mapping>
         <filter-name>themeDispatchFilter</filter-name>
-        <url-pattern>/img/*</url-pattern>
-        <url-pattern>/styles/*</url-pattern>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
 
 

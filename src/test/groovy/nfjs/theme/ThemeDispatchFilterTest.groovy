@@ -26,7 +26,7 @@ class ThemeDispatchFilterTest extends BaseThemeTest {
 
         if(homeJsp.exists() == false) homeJsp << "<html><body>foo</body></html>"
 
-        MockServletContext msc = new MockServletContext(new File(webAppDir).toURI().toString())
+        MockServletContext msc = new MockServletContext(webAppDirURI)
         MockFilterConfig mfc = new MockFilterConfig(msc)
 
         MockHttpServletRequest req = new MockHttpServletRequest(msc)
@@ -37,6 +37,8 @@ class ThemeDispatchFilterTest extends BaseThemeTest {
         String css = "/styles/theme.css"
 
         req.requestURI = css
+
+        log.warn("R: ${req.requestURI} : ${req.servletPath} : ${req.contextPath}")
 
         ThemeDispatchFilter tdf = new ThemeDispatchFilter()
         tdf.init(mfc)
@@ -50,8 +52,41 @@ class ThemeDispatchFilterTest extends BaseThemeTest {
         // test the method
         tdf.destroy()
 
+    }
+
+    @Test void testParseResourcePath() {
+
+
+        MockServletContext msc = new MockServletContext(webAppDirURI)
+        MockFilterConfig mfc = new MockFilterConfig(msc)
+
+        MockHttpServletRequest req = new MockHttpServletRequest(msc)
+
+        req.requestURI = "/app1/index.jsp"
+        req.contextPath = "/app1"
+
+        ThemeDispatchFilter tdf = new ThemeDispatchFilter()
+
+        String resourcePath = tdf.parseResourcePath(req)
+
+        assertTrue resourcePath == "/index.jsp"
+        
+        req.contextPath = null
+
+        resourcePath = tdf.parseResourcePath(req)
+
+        assertTrue resourcePath == "/app1/index.jsp"
+
+        req.contextPath = ""
+
+        resourcePath = tdf.parseResourcePath(req)
+
+        assertTrue resourcePath == "/app1/index.jsp"
+        
 
     }
+
+
 
     @Test void test404() {
 
