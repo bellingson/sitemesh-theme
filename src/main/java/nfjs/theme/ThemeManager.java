@@ -130,6 +130,12 @@ public class ThemeManager {
             alternateDomains.add("www." + domainName);
         }
 
+		// if domain has a port add alt domain without port
+		int x = domainName.indexOf(":");
+		if(x != -1) {
+			alternateDomains.add(domainName.substring(0,x));
+		}
+
     }
 
     public static String delimitAbreviations(Collection<AppTheme> themes) {
