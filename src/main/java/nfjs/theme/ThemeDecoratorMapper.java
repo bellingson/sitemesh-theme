@@ -44,11 +44,19 @@ public class ThemeDecoratorMapper extends AbstractDecoratorMapper {
         String name = getMappedName(thisPath);
         Decorator result = getNamedDecorator(request, name);
 
+		if(log.isDebugEnabled()) {
+			log.debug("GET DECORATOR: " + thisPath + " : NAME: " + name + " R: " + result );
+		}
+
         return result == null ? super.getDecorator(request, page) : result;
     }
 
     public String parsePath(HttpServletRequest request) {
 
+		// seeing a bug because servlet path does not match the request URI
+		String thisPath = request.getRequestURI();
+
+/*
         String thisPath = request.getServletPath();
 
         // getServletPath() returns null unless the mapping corresponds to a servlet
@@ -66,6 +74,7 @@ public class ThemeDecoratorMapper extends AbstractDecoratorMapper {
             // in servlet 2.4, if a request is mapped to '/*', getServletPath returns null (SIM-130)
             thisPath = request.getPathInfo();
         }
+*/
         return thisPath;
     }
     
