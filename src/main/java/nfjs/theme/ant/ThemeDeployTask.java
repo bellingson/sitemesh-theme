@@ -40,9 +40,22 @@ public class ThemeDeployTask extends org.apache.tools.ant.Task {
         for(String theme : themes) {
 
              filterSet.addFilter("appTheme.code",theme);
+             filterSet.addFilter("theme.code",theme);
 
-             String parent = p.getProperty("appTheme." + theme + ".parent");
-             deployTheme(theme,parent);
+			 String [] parents = null;
+			 String parentsString = p.getProperty("appTheme." + theme + ".parent");
+			
+			 if(parentsString != null)
+   			    parents = parentsString.split(",");
+
+			 if(parents != null) {
+				 for(String parent : parents)
+	             	deployTheme(theme,parent);
+				
+  			  } else {
+ 					deployTheme(theme,null);
+			 }
+
         }
 
         copyWebSourceFiles();
@@ -90,7 +103,7 @@ public class ThemeDeployTask extends org.apache.tools.ant.Task {
 
         if(parent != null) {
             String parentSource = resolvePath(sourcePath + "/" + themePath + "/" + parent);
-            copyThemeSourceDir(parentSource,themeTarget,false);
+            copyThemeSourceDir(parentSource,themeTarget,true);
         }
 
         String themeSource = resolvePath(sourcePath + "/" + themePath + "/" + theme);
@@ -107,11 +120,11 @@ public class ThemeDeployTask extends org.apache.tools.ant.Task {
 
            log("filtering files: " + filterIncludes);
 
-           doCopy(source,target, filterIncludes,null,overwrite);
-           doCopy(source,target,null, filterIncludes,overwrite);
+           doCopyWithFiltering(source,target, filterIncludes,null,overwrite);
+           doCopyWithFiltering(source,target,null, filterIncludes,overwrite);
 
         } else {
-           doCopy(source,target,includes,null,overwrite);
+           doCopyWithFiltering(source,target,includes,null,overwrite);
         }
 
 
@@ -123,10 +136,9 @@ public class ThemeDeployTask extends org.apache.tools.ant.Task {
         return p.getBaseDir() + "/" + path;
     }
 
-
-    void doCopy(String srcdir, String todir, String includes, String excludes, Boolean overwrite) {
-
-        File todirF = new File(todir);
+	Copy createCopy(String srcdir, String todir, String includes, String excludes, Boolean overwrite) {
+		
+		File todirF = new File(todir);
         File srcdirF = new File(srcdir);
 
         log(todirF.getAbsolutePath());
@@ -135,9 +147,9 @@ public class ThemeDeployTask extends org.apache.tools.ant.Task {
 
         Copy copy = new Copy();
         copy.setProject(getProject());
-        copy.setFiltering(true);
         copy.setTodir(todirF);
         copy.setOverwrite(overwrite);
+		copy.setPreserveLastModified(true);
                                                 
         FileSet fileSet = new FileSet();
         fileSet.setDir(srcdirF);
@@ -147,10 +159,26 @@ public class ThemeDeployTask extends org.apache.tools.ant.Task {
             fileSet.setExcludes(excludes);
 
         copy.addFileset(fileSet);
+		return copy;
+		
+	}
+
+    void doCopy(String srcdir, String todir, String includes, String excludes, Boolean overwrite) {
+
+        Copy copy = createCopy(srcdir,todir,includes,excludes,overwrite);
         copy.execute();
         
     }
 
+    void doCopyWithFiltering(String srcdir, String todir, String includes, String excludes, Boolean overwrite) {
+
+        Copy copy = createCopy(srcdir,todir,includes,excludes,overwrite);
+		copy.setFiltering(true);
+		copy.setEncoding("UTF-8");
+		copy.setOutputEncoding("UTF-8");		
+        copy.execute();
+        
+    }
     
 
 
