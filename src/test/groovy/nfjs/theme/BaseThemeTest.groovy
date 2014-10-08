@@ -58,7 +58,7 @@ class BaseThemeTest {
 
              themeManager = new ThemeManager();
 
-             List themes = []
+             List<AppTheme> themes = []
              themes << new DefaultTheme(id:1,code:'foo',domainName:'test.foo.com:8080',homeUri:'/index.html',active:true)
              themes << new DefaultTheme(id:2,code:'bar',domainName:'www.test.bar.com:8080',homeUri:'/index.html',active:true)
 

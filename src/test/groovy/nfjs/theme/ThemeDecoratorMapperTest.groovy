@@ -128,6 +128,8 @@ public class ThemeDecoratorMapperTest extends BaseThemeTest {
 
          String path = tdm.parsePath(req)
 
+        log.debug('path: ' + path)
+
          assertTrue path == "/home.jsp"
 
 

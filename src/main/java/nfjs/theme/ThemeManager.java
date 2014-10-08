@@ -27,6 +27,14 @@ public class ThemeManager {
         AppTheme appTheme = (AppTheme) domainThemeMap.get(domainName);
 
         if(appTheme == null) {
+            int x = domainName.indexOf(':');
+            if(x != -1) {
+                domainName = domainName.substring(0,x);
+                appTheme = (AppTheme) domainThemeMap.get(domainName);
+            }
+        }
+
+        if(appTheme == null) {
             LogFactory.getLog(ThemeManager.class).warn("Unrecognized domain: " + domainName);
             appTheme = (AppTheme) themes.get(0);
         }
@@ -76,7 +84,7 @@ public class ThemeManager {
         themeHolder.set(null);
     }
 
-    public void setThemes(List themes) {
+    public void setThemes(List<AppTheme> themes) {
         ThemeManager.themes = themes;
 
         init(themes);
