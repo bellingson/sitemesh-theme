@@ -24,6 +24,11 @@ public class ThemeManager {
 
     public static AppTheme setDomain(String domainName) {
 
+        if(domainName == null) {
+            LogFactory.getLog(ThemeManager.class).error("ERROR: ThemeManager.setDomain domainName is null");
+            return null;
+        }
+
         AppTheme appTheme = (AppTheme) domainThemeMap.get(domainName);
 
         if(appTheme == null) {
@@ -95,7 +100,7 @@ public class ThemeManager {
     }
 
     public static String resolveResource(String name) {
-        return "/WEB-INF/theme/" + getTheme().getCode() + name;
+        return "/WEB-INF/jsp/n/theme/" + getTheme().getCode() + name;
     }
 
 

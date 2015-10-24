@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
+
 /**
  * The ThemeIdentityFilter inspects the host value in the HTTP header to identify the theme 
  * and call setDomain(host) in the ThemeManager.  Based on the host string, ThemeManager sets
@@ -34,10 +35,21 @@ public class ThemeIdentityFilter implements Filter {
            HttpServletResponse resp = (HttpServletResponse) response;
 
            String domainName = req.getHeader("host");
+           if(domainName == null)
+               domainName = req.getHeader("Host");
+
+           if(domainName == null) {
+               log.warn("REQUEST IS MISSING HOST HEADER: " + ((HttpServletRequest) request).getRequestURL());
+           }
 
            try {
 
-               AppTheme appTheme = ThemeManager.setDomain(domainName);
+               AppTheme appTheme;
+               if(domainName != null)
+                   appTheme = ThemeManager.setDomain(domainName);
+               else
+                   appTheme = ThemeManager.setThemeId(1l);
+
                req.setAttribute(THEME_SESSION_ATTRIBUTE,appTheme);
 
                String uri = req.getRequestURI();
@@ -45,6 +57,9 @@ public class ThemeIdentityFilter implements Filter {
                // if uri matches home pattern continue in filter chain
                if(isHomeURI(req,uri)) {
                    String redirectUri = formatHomeURI(req,appTheme);
+
+                   log.debug("home uri: " + redirectUri);
+
                    resp.sendRedirect(redirectUri);
                    return;
                }
@@ -62,6 +77,7 @@ public class ThemeIdentityFilter implements Filter {
         public String formatHomeURI(HttpServletRequest req, AppTheme theme) {
 
             String context = req.getContextPath();
+
             if(context == null || context.trim().equals("")) {
                 return theme.getHomeUri();
             }

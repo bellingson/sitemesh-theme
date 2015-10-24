@@ -1,5 +1,5 @@
 
-version = '1.0.1-rc6'
+version = '1.0.1-rc7'
 
 apply plugin: 'groovy'
 apply plugin: 'idea'

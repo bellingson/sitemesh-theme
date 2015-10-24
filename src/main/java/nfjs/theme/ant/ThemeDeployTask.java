@@ -17,7 +17,7 @@ public class ThemeDeployTask extends org.apache.tools.ant.Task {
     Boolean overwrite = false;
 
     String sourcePath;
-    String themePath = "WEB-INF/theme";
+    String themePath = "WEB-INF/jsp/n/theme";
     String targetPath;
 
     //String includes = "**/*.jsp,**/*.css,**/*.html";
