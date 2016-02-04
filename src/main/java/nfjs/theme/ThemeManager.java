@@ -100,7 +100,7 @@ public class ThemeManager {
     }
 
     public static String resolveResource(String name) {
-        return "/WEB-INF/jsp/n/theme/" + getTheme().getCode() + name;
+        return "/WEB-INF/jsp/theme/" + getTheme().getCode() + name;
     }
 
 

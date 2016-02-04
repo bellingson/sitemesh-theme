@@ -211,6 +211,10 @@ public class ThemeDeployTask extends org.apache.tools.ant.Task {
         this.filterIncludes = filterIncludes;
     }
 
+    public void setExcludes(String excludes) {
+        this.excludes = excludes;
+    }
+
     public void setDevApp(String devApp) {
         this.devApp = devApp;
     }

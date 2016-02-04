@@ -31,7 +31,7 @@ public class ThemeConfigLoaderTest extends BaseThemeTest {
 
         assertTrue d != null
 
-        assertTrue d.page == "/WEB-INF/jsp/n/theme/${theme.code}/decorators/home.jsp"
+        assertTrue d.page == "/WEB-INF/jsp/theme/${theme.code}/decorators/home.jsp"
 
         ThemeManager.setThemeId(2)
         theme = ThemeManager.theme
@@ -40,7 +40,7 @@ public class ThemeConfigLoaderTest extends BaseThemeTest {
 
         assertTrue d != null
 
-        assertTrue d.page == "/WEB-INF/jsp/n/theme/${theme.code}/decorators/home_bar.jsp"
+        assertTrue d.page == "/WEB-INF/jsp/theme/${theme.code}/decorators/home_bar.jsp"
 
 
     }

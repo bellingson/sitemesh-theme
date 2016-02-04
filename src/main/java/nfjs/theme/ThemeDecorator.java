@@ -14,7 +14,7 @@ public class ThemeDecorator extends DefaultDecorator {
 
     public ThemeDecorator(AppTheme appTheme, String name, String page, String uriPath, String role, Map parameter) {
         super(name,page,uriPath,role,parameter);
-        this.page =  "/WEB-INF/jsp/n/theme/" + appTheme.getCode() + "/decorators/" + page;
+        this.page =  "/WEB-INF/jsp/theme/" + appTheme.getCode() + "/decorators/" + page;
     }
 
     

@@ -22,7 +22,7 @@ class ThemeDispatchFilterTest extends BaseThemeTest {
 
         AppTheme theme = ThemeManager.theme
         
-        File homeJsp = new File("${webAppDir}/WEB-INF/jsp/n/theme/${theme.code}/home.jsp" )
+        File homeJsp = new File("${webAppDir}/WEB-INF/jsp/theme/${theme.code}/home.jsp" )
 
         if(homeJsp.exists() == false) homeJsp << "<html><body>foo</body></html>"
 
@@ -47,7 +47,7 @@ class ThemeDispatchFilterTest extends BaseThemeTest {
 
         log.debug("R: ${resp.includedUrl}")
 
-        assertTrue resp.includedUrl == "/WEB-INF/jsp/n/theme/${theme.code}${css}"
+        assertTrue resp.includedUrl == "/WEB-INF/jsp/theme/${theme.code}${css}"
 
         // test the method
         tdf.destroy()
