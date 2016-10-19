@@ -1,6 +1,7 @@
 package nfjs.theme
 
-
+import javax.servlet.ServletException
+import javax.servlet.http.HttpUpgradeHandler
 
 import static org.junit.Assert.*
 import org.junit.Test
@@ -127,7 +128,11 @@ class ThemeDispatchFilterTest extends BaseThemeTest {
                 throw new Exception("test exception handling")
                 return null
             }
-            
+
+            @Override
+            def <T extends HttpUpgradeHandler> T upgrade(Class<T> handlerClass) throws IOException, ServletException {
+                return null
+            }
         }
 
         StringWriter out = new StringWriter()

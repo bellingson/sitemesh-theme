@@ -40,6 +40,11 @@ public class ThemeIdentityFilter implements Filter {
 
            if(domainName == null) {
                log.warn("REQUEST IS MISSING HOST HEADER: " + ((HttpServletRequest) request).getRequestURL());
+           } else {
+               int x = domainName.lastIndexOf(':');
+               if(x >= 0) {
+                   domainName = domainName.substring(0, x);
+               }
            }
 
            try {
