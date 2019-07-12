@@ -33,6 +33,8 @@ public interface AppTheme {
 
     public void setHomeUri(String homeUri);
 
+    public Boolean getShouldRedirectHomeUri();
+
     public Boolean isActive();
 
     public void setActive(Boolean active);

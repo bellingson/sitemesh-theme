@@ -60,7 +60,7 @@ public class ThemeIdentityFilter implements Filter {
                String uri = req.getRequestURI();
 
                // if uri matches home pattern continue in filter chain
-               if(isHomeURI(req,uri)) {
+               if(isHomeURI(req,uri) && appTheme.getShouldRedirectHomeUri()) {
                    String redirectUri = formatHomeURI(req,appTheme);
 
                    log.debug("home uri: " + redirectUri);

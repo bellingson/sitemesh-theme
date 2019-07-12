@@ -83,5 +83,6 @@ public class DefaultTheme implements AppTheme {
         this.alternateDomains = alternateDomains;
     }
 
+    public Boolean getShouldRedirectHomeUri() { return true; }
 
 }
