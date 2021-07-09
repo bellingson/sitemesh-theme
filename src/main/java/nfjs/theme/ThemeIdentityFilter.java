@@ -55,6 +55,13 @@ public class ThemeIdentityFilter implements Filter {
                else
                    appTheme = ThemeManager.setThemeId(1l);
 
+               // redirect all requests for this domain
+               String redirect = appTheme.getRedirectTo();
+               if(redirect != null) {
+                   resp.sendRedirect(redirect);
+                   return;
+               }
+
                req.setAttribute(THEME_SESSION_ATTRIBUTE,appTheme);
 
                String uri = req.getRequestURI();

@@ -1,11 +1,11 @@
 
-version = '1.0.1-rc10'
+version = '1.0.1-rc14'
 
 apply plugin: 'groovy'
 apply plugin: 'idea'
 
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 
 //apply from: 'cobertura.gradle'
 
@@ -72,7 +72,7 @@ idea {
 
 
 
-task copyTestWebApp << {
+task copyTestWebApp() {
 
     ant.copy(todir:'build/webapp') {
         fileset(dir:'src/test/webapp')

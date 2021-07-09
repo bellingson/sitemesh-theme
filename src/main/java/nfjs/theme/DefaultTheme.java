@@ -59,7 +59,7 @@ public class DefaultTheme implements AppTheme {
         this.homeUri = homeUri;
     }
 
-    public Boolean isActive() {
+    public Boolean getActive() {
         return active;
     }
 
@@ -84,5 +84,7 @@ public class DefaultTheme implements AppTheme {
     }
 
     public Boolean getShouldRedirectHomeUri() { return true; }
+
+    public String getRedirectTo() { return null; }
 
 }

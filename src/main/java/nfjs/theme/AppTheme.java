@@ -35,7 +35,7 @@ public interface AppTheme {
 
     public Boolean getShouldRedirectHomeUri();
 
-    public Boolean isActive();
+    public Boolean getActive();
 
     public void setActive(Boolean active);
 
@@ -47,5 +47,6 @@ public interface AppTheme {
 
     void setAlternateDomains(List<String> alternateDomains);
 
+    public String getRedirectTo();
 
 }

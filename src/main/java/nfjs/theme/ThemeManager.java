@@ -40,7 +40,7 @@ public class ThemeManager {
         }
 
         if(appTheme == null) {
-            LogFactory.getLog(ThemeManager.class).warn("Unrecognized domain: " + domainName);
+//            LogFactory.getLog(ThemeManager.class).warn("Unrecognized domain: " + domainName);
             appTheme = (AppTheme) themes.get(0);
         }
 
